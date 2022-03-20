@@ -7,6 +7,9 @@ module.exports = {
 			fontFamily: {
 				primary: ['Inter', ...fontFamily.sans],
 			},
+			gridTemplateColumns: {
+				container: 'repeat(auto-fill, minmax(220px, 1fr))',
+			},
 		},
 	},
 	plugins: [],
