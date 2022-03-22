@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import { MovieType } from 'types/Movies';
+import { DEFAULT_IMAGE } from 'utils/apiMovies';
 
 interface Props {
 	movie: MovieType;
 }
 
 const MovieCard = ({ movie }: Props) => {
-	const imageUrl =
-		movie.Poster !== 'N/A'
-			? movie.Poster
-			: 'https://res.cloudinary.com/gryffin/image/upload/v1647971129/movie-search/anika-mikkelson-dWYjy9zIiF8-unsplash_opt1nw.jpg';
+	const imageUrl = movie.Poster !== 'N/A' ? movie.Poster : DEFAULT_IMAGE;
 
 	return (
 		<Link to={`/detail/${movie.imdbID}`}>
