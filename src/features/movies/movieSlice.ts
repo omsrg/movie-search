@@ -1,13 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MovieDetailType } from '../../types/MovieDetail';
-import { ResponseType } from '../../types/Movies';
-import apiMovies from '../../utils/apiMovies';
+import { MovieDetailType } from 'types/MovieDetail';
+import { ResponseType } from 'types/Movies';
+import { DefaultState, TermAndPage } from 'types/MovieSlice';
+import apiMovies from 'utils/apiMovies';
 
-interface TermAndPage {
-	term: string;
-	page?: number;
-}
+const initialState = {
+	movies: {},
+	shows: {},
+	movieDetail: {},
+	isLoading: false,
+	errorMessage: null,
+	page: 1,
+} as DefaultState;
 
+// Get movies by title
 export const fetchMoviesByTitle = createAsyncThunk<
 	ResponseType,
 	TermAndPage,
@@ -21,11 +27,11 @@ export const fetchMoviesByTitle = createAsyncThunk<
 		);
 		return response.data;
 	} catch (error: any) {
-		console.log(error);
 		return rejectWithValue(error.response.data.Error);
 	}
 });
 
+// Get movies detail
 export const fetchMoviesById = createAsyncThunk<MovieDetailType, string, { rejectValue: string }>(
 	'movies/fetchMoviesById',
 	async (movieId, { rejectWithValue }) => {
@@ -40,6 +46,8 @@ export const fetchMoviesById = createAsyncThunk<MovieDetailType, string, { rejec
 	}
 );
 
+// Get series
+// for next feature
 export const fetchSeriesByTitle = createAsyncThunk<ResponseType>(
 	'movies/fetchSeriesByTitle',
 	async () => {
@@ -53,23 +61,6 @@ export const fetchSeriesByTitle = createAsyncThunk<ResponseType>(
 		}
 	}
 );
-
-interface DefaultState {
-	movies: ResponseType;
-	shows: ResponseType;
-	movieDetail: MovieDetailType;
-	isLoading: boolean;
-	errorMessage: string | null | undefined;
-	page: number;
-}
-const initialState = {
-	movies: {},
-	shows: {},
-	movieDetail: {},
-	isLoading: false,
-	errorMessage: null,
-	page: 1,
-} as DefaultState;
 
 const movieSlice = createSlice({
 	name: 'movies',
@@ -94,7 +85,6 @@ const movieSlice = createSlice({
 			})
 			.addCase(fetchMoviesByTitle.rejected, (state, action) => {
 				state.isLoading = false;
-				console.log('xxx', action.payload);
 				if (action.payload) {
 					state.errorMessage = action.payload;
 				}
@@ -109,10 +99,6 @@ const movieSlice = createSlice({
 			.addCase(fetchMoviesById.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errorMessage = action.payload;
-			})
-			.addCase(fetchSeriesByTitle.fulfilled, (state, action) => {
-				console.log('fullfilled');
-				state.shows = action.payload;
 			});
 	},
 });
