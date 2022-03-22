@@ -9,7 +9,7 @@ const SearchInput: React.VFC<Props> = ({ onSubmit, search, setSearch }) => {
 	return (
 		<form onSubmit={onSubmit} className='w-full sm:w-1/2 lg:max-w-sm'>
 			<div className='flex items-center rounded-md border border-dark-300 p-1 md:h-10'>
-				<button className='p-2 text-base'>
+				<button className='p-2 text-base' aria-label='Search Button'>
 					<BsSearch className='' />
 				</button>
 				<input

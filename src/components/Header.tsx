@@ -29,7 +29,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className='fixed z-50 w-full bg-dark-500 shadow-md'>
+		<header className='fixed top-0 z-50 w-full bg-dark-500 shadow-md'>
 			<div className='flex flex-col items-center p-4 sm:h-20 sm:flex-row sm:justify-between sm:px-10'>
 				<Link to='/'>
 					<div className='h2 mb-2 font-bold tracking-wider text-amber-400 sm:mb-0'>

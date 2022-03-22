@@ -26,8 +26,8 @@ const MovieList = () => {
 				<span className='text-xs uppercase text-dark-200 sm:text-base'>{searchTerm}</span>
 			)}
 			<div className='my-5'>
-				<h2 className='mb-6'>Movies</h2>
-				<div className=' grid grid-cols-custom1 justify-center gap-5 xs:grid-cols-custom2 sm:grid-cols-custom3 sm:gap-8'>
+				<h1 className='h2 mb-6'>Movies</h1>
+				<div className=' grid grid-cols-custom1 justify-center gap-5 gap-y-10 xs:grid-cols-custom2 sm:grid-cols-custom3 sm:gap-8'>
 					{renderMovies}
 				</div>
 			</div>
