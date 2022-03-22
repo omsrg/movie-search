@@ -1,17 +1,12 @@
-import { useAppSelector } from '../App/hooks';
+import { useAppSelector } from 'app/hooks';
 import MovieCard from './MovieCard';
-import Spinner from './Spinner';
 
 const MovieList = () => {
-	const { movies, isLoading, errorMessage } = useAppSelector((state) => state.movieApp);
-	// const series = useAppSelector((state) => state.movies.shows);
-
-	// console.log(movies);
+	const { movies, errorMessage } = useAppSelector((state) => state.movieApp);
 
 	const searchTerm = localStorage.getItem('searchTerm');
 
 	let renderMovies;
-	let renderSeries;
 
 	renderMovies =
 		movies.Response === 'True' ? (
@@ -25,29 +20,16 @@ const MovieList = () => {
 			</div>
 		);
 
-	// renderSeries =
-	// 	series.Response === 'True' ? (
-	// 		series.Search.map((serie, index) => <MovieCard key={index} movie={serie} />)
-	// 	) : (
-	// 		<div>
-	// 			<p>{series.Error}</p>
-	// 		</div>
-	// 	);
-
-	if (isLoading) {
-		return <Spinner />;
-	}
-
 	return (
-		<div className='mov-wrapper'>
-			{movies.Response === 'True' && <span>Results for {searchTerm}</span>}
-			<div className='movie-list my-5'>
+		<div className='mb-20'>
+			{movies.Response === 'True' && (
+				<span className='text-xs uppercase text-dark-200 sm:text-base'>{searchTerm}</span>
+			)}
+			<div className='my-5'>
 				<h2 className='mb-6'>Movies</h2>
-				<div className='container grid grid-cols-container gap-4'>{renderMovies}</div>
-			</div>
-			<div className='movie-list my-5'>
-				<h2 className='mb-6'>Shows</h2>
-				<div className='container grid grid-cols-container gap-4'>{renderSeries}</div>
+				<div className=' grid grid-cols-custom1 justify-center gap-5 xs:grid-cols-custom2 sm:grid-cols-custom3 sm:gap-8'>
+					{renderMovies}
+				</div>
 			</div>
 		</div>
 	);

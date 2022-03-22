@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import { AiFillStar, AiFillCalendar } from 'react-icons/ai';
-// import { HiThumbUp } from 'react-icons/hi';
-// import { BiFilm } from 'react-icons/bi';
-import { useAppDispatch, useAppSelector } from '../App/hooks';
-import { fetchMoviesById, removeMovieDetail } from '../features/movies/movieSlice';
-import Spinner from '../components/Spinner';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { fetchMoviesById, removeMovieDetail } from 'features/movies/movieSlice';
+
+import Spinner from 'components/ui/Spinner';
+import MovieSummary from 'components/MovieDetail/MovieSummary';
+import MovieInfo from 'components/MovieDetail/MovieInfo';
+import MoviePoster from 'components/MovieDetail/MoviePoster';
+import BackButton from 'components/ui/BackButton';
 
 const MovieDetail = () => {
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
 	const { imdbID } = useParams();
 
 	const dispatch = useAppDispatch();
@@ -19,6 +19,7 @@ const MovieDetail = () => {
 
 	useEffect(() => {
 		dispatch(fetchMoviesById(imdbID as string));
+		window.scrollTo(0, 0);
 
 		return () => {
 			dispatch(removeMovieDetail());
@@ -30,55 +31,17 @@ const MovieDetail = () => {
 	}
 
 	return (
-		<div className='flex justify-evenly py-10'>
-			<div className='left'>
-				<h1 className='text-'>{movieDetail.Title}</h1>
-				<div className=' '>
-					<ul className='flex space-x-5'>
-						<li className='flex flex-col'>
-							<span>Year</span>
-							<span>{movieDetail.Year}</span>
-						</li>
-						<li className='flex flex-col'>
-							<span>Rated</span>
-							<span>{movieDetail.Rated}</span>
-						</li>
-						<li className='flex flex-col'>
-							<span>Duration</span>
-							<span>{movieDetail.Runtime}</span>
-						</li>
-					</ul>
-				</div>
-				<p className='mt-5 text-base'>{movieDetail.Plot}</p>
-
-				<div className='info'>
-					<div className=''>
-						<span className='inline-block w-[100px] py-2 font-semibold'>Director</span>
-						<span className=''>{movieDetail.Director}</span>
-					</div>
-					<div className=''>
-						<span className='inline-block w-[100px] py-2 font-semibold'>Stars</span>
-						<span>{movieDetail.Actors}</span>
-					</div>
-					<div className=''>
-						<span className='inline-block w-[100px] py-2 font-semibold'>Genres</span>
-						<span>{movieDetail.Genre}</span>
-					</div>
-					<div className=''>
-						<span className='inline-block w-[100px] py-2 font-semibold'>Languange</span>
-						<span>{movieDetail.Language}</span>
-					</div>
-					<div className=''>
-						<span className='inline-block w-[100px] py-2 font-semibold'>Awards</span>
-						<span>{movieDetail.Awards}</span>
-					</div>
-				</div>
-			</div>
-
-			<div className='r'>
-				<img src={movieDetail.Poster} alt={movieDetail.Title} />
-			</div>
-		</div>
+		<>
+			<BackButton />
+			<MovieSummary className='my-10 grid lg:grid-cols-[60%_40%]'>
+				<MovieInfo movie={movieDetail} className='p-4 ' />
+				<MoviePoster
+					title={movieDetail.Title}
+					poster={movieDetail.Poster}
+					className='order-first mx-auto flex w-full max-w-lg justify-center md:p-4 lg:order-last lg:max-h-[30rem] lg:w-80'
+				/>
+			</MovieSummary>
+		</>
 	);
 };
 export default MovieDetail;

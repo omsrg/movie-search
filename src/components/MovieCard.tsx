@@ -6,18 +6,17 @@ interface Props {
 }
 
 const MovieCard = ({ movie }: Props) => {
+	const imageUrl = movie.Poster !== 'N/A' ? movie.Poster : '/asset/my-image.jpg';
+
 	return (
 		<Link to={`/detail/${movie.imdbID}`}>
-			<div className='h-full cursor-pointer bg-indigo-500'>
-				<div className=''>
-					<div className='card-top h-[300px]'>
-						<img src={movie.Poster} alt={movie.Title} className='h-full w-full' />
-					</div>
-					<div className='p-4'>
-						<h4 className='mb-4 text-xl'>{movie.Title}</h4>
-						<p>{movie.Year}</p>
-					</div>
+			<div className='card'>
+				<div className='h-[300px]'>
+					<img src={imageUrl} alt={movie.Title} className='h-full w-full object-cover' />
 				</div>
+				<h4 className='my-4 px-2 text-base'>
+					{movie.Title} <span className=''>({movie.Year})</span>
+				</h4>
 			</div>
 		</Link>
 	);

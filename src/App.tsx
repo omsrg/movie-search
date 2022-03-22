@@ -10,7 +10,7 @@ function App() {
 		<div className=''>
 			<Router>
 				<Header />
-				<main className='layout min-h-screen'>
+				<main className='layout min-h-screen py-32 sm:py-24'>
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/detail/:imdbID' element={<MovieDetail />} />

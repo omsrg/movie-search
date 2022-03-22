@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
-import { useAppDispatch } from '../App/hooks';
-import { changePage, fetchMoviesByTitle } from '../features/movies/movieSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { useAppDispatch } from 'app/hooks';
+import { changePage, fetchMoviesByTitle } from 'features/movies/movieSlice';
 import SearchInput from './SearchInput';
 
 const Header = () => {
@@ -29,10 +29,12 @@ const Header = () => {
 	};
 
 	return (
-		<header className='bg-gray-900 '>
-			<div className='flex h-20 items-center px-10'>
+		<header className='fixed z-50 w-full bg-dark-500 shadow-md'>
+			<div className='flex flex-col items-center p-4 sm:h-20 sm:flex-row sm:justify-between sm:px-10'>
 				<Link to='/'>
-					<p className='text-2xl font-semibold text-white'>Movie App</p>
+					<div className='h2 mb-2 font-bold tracking-wider text-amber-400 sm:mb-0'>
+						Movie Search
+					</div>
 				</Link>
 				<SearchInput onSubmit={submitHandler} search={search} setSearch={setSearch} />
 			</div>

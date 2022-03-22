@@ -41,14 +41,19 @@
 	}
 
 	body {
-		@apply h-full font-primary text-sm md:text-base;
-		background-color: #f4f4f4;
+		@apply h-full bg-dark-400 font-primary text-sm text-white md:text-base;
 	}
 	/* #endregion  /**======== Default Typography =========== */
 
 	.layout {
 		max-width: 1300px;
 		@apply mx-auto w-11/12;
+	}
+}
+
+@layer components {
+	.card {
+		@apply flex h-full cursor-pointer flex-col overflow-hidden rounded-md bg-dark-500 transition-all duration-200 hover:-translate-y-2 hover:shadow-lg hover:shadow-dark-300;
 	}
 }
 
@@ -70,7 +75,7 @@
 		width: 64px;
 		height: 64px;
 		border: 8px solid;
-		border-color: #4f46e5 transparent #818cf8 transparent;
+		border-color: #fbbf24 transparent #fcd34d transparent;
 		border-radius: 50%;
 		animation: spin 1.2s linear infinite;
 	}
