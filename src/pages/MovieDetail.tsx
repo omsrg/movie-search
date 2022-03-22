@@ -15,7 +15,6 @@ const MovieDetail = () => {
 
 	const dispatch = useAppDispatch();
 	const { movieDetail, isLoading } = useAppSelector((state) => state.movieApp);
-	console.log('detail', movieDetail);
 
 	useEffect(() => {
 		dispatch(fetchMoviesById(imdbID as string));
