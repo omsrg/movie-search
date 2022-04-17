@@ -1,5 +1,7 @@
 # Movie Search
 
+![Screenshot 2022-04-17 200020](https://user-images.githubusercontent.com/72729349/163715432-6f578e10-2811-44aa-8d25-b07c10c1d7b3.png)
+
 ## Built With
 
 - ReactJS
